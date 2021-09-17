@@ -35,6 +35,11 @@ export const DATA = [
     id: '2990527',
   },
   {
+    imageUri: 'https://image.flaticon.com/icons/png/128/2990/2990507.png',
+    title: 'Sea',
+    id: '2990507',
+  },
+  {
     imageUri: 'https://image.flaticon.com/icons/png/128/2990/2990522.png',
     title: 'Tropical Bar',
     id: '2990522',
