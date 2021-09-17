@@ -1,13 +1,18 @@
 import React from 'react';
 import { SafeAreaView, TouchableOpacity, View } from 'react-native';
+import { SharedElement } from 'react-navigation-shared-element';
 import { Icon } from '../components/Icon';
 import { MarketingSlider } from '../components/MarketingSlider';
 import { SPACING } from '../shared/constants';
 import { DATA } from '../shared/statics';
 
-const List = () => {
+interface Props {
+  navigation: any;
+}
+
+const List: React.FC<Props> = ({ navigation }) => {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#ffffff' }}>
       <MarketingSlider />
       <View
         style={{
@@ -24,8 +29,10 @@ const List = () => {
               style={{
                 padding: SPACING,
               }}
-              onPress={() => {}}>
-              <Icon uri={item.imageUri} />
+              onPress={() => navigation.push('Detail', { item })}>
+              <SharedElement id={`item.${item.id}.icon`}>
+                <Icon uri={item.imageUri} />
+              </SharedElement>
             </TouchableOpacity>
           );
         })}

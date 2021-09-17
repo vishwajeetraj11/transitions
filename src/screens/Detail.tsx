@@ -3,11 +3,11 @@ import {
   FlatList,
   SafeAreaView,
   ScrollView,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
+import { SharedElement } from 'react-navigation-shared-element';
 import { BackIcon } from '../components/BackIcon';
 import { Icon } from '../components/Icon';
 import { SPACING, width } from '../shared/constants';
@@ -15,6 +15,7 @@ import { DATA } from '../shared/statics';
 
 interface Props {
   navigation: any;
+  sharedElements: any;
 }
 
 const Detail: React.FC<Props> = ({ navigation }) => {
@@ -32,7 +33,9 @@ const Detail: React.FC<Props> = ({ navigation }) => {
         }}>
         {DATA.map(item => (
           <TouchableOpacity style={{ padding: SPACING }} key={item.id}>
-            <Icon uri={item.imageUri} />
+            <SharedElement id={`item.${item.id}.icon`}>
+              <Icon uri={item.imageUri} />
+            </SharedElement>
           </TouchableOpacity>
         ))}
       </View>
@@ -70,6 +73,12 @@ const Detail: React.FC<Props> = ({ navigation }) => {
   );
 };
 
-export default Detail;
+// Detail.sharedElements = (route: any, otherRoute: any, showing: any) => {
+//   // const { item } = route.params;
+//   return DATA.map(item => `item.${item.id}.icon`);
 
-const styles = StyleSheet.create({});
+//   // In case if you want to animate only 1 item
+//   // return [`item.${item.id}.icon`];
+// };
+
+export default Detail;
