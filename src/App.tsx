@@ -1,22 +1,10 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-
 import React from 'react';
 import { Text, View } from 'react-native';
+import Detail from './screens/Detail';
+import List from './screens/List';
 
 const App = () => {
-  return (
-    <View>
-      <Text>Awesome React Native Project...</Text>
-    </View>
-  );
+  return <List />;
 };
 
 export default App;
