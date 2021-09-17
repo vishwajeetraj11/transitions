@@ -6,5 +6,5 @@ Solution: Just import that font and load it before using.
 
 ```
 import AntDesign from 'react-native-vector-icons/AntDesign';
-AntDesign.loadFont();
+AntDesign.loadFont(); 
 ```
