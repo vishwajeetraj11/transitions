@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Easing, Text, View } from 'react-native';
 import Detail from './screens/Detail';
 import { enableScreens } from 'react-native-screens';
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
@@ -24,8 +24,14 @@ const App = () => {
             gestureEnabled: false,
             // for the open or the close of the navigation what type of animation should occur
             transitionSpec: {
-              open: { animation: 'timing', config: { duration: 1000 } },
-              close: { animation: 'timing', config: { duration: 1000 } },
+              open: {
+                animation: 'timing',
+                config: { duration: 500, easing: Easing.inOut(Easing.ease) },
+              },
+              close: {
+                animation: 'timing',
+                config: { duration: 500, easing: Easing.inOut(Easing.ease) },
+              },
             },
             // currently it's transition => opacity based on navigation percentage
             cardStyleInterpolator: ({ current: { progress } }) => {
