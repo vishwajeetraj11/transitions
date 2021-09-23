@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -7,6 +7,7 @@ import {
   Image,
   Text,
   View,
+  Animated,
 } from 'react-native';
 import { travelData } from '../shared/statics';
 import { animation2Specs } from '../shared/constants';
@@ -18,23 +19,71 @@ interface Props {
 }
 
 export const TravelList: React.FC<Props> = ({ navigation }) => {
+  const scrollX = useRef(new Animated.Value(0)).current;
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <FlatList
+      <Animated.FlatList
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+          { useNativeDriver: true },
+        )}
         data={travelData}
         keyExtractor={item => item.id}
         horizontal
         showsHorizontalScrollIndicator={false}
         snapToInterval={FULL_SIZE}
         decelerationRate={'fast'} // makes the snaping faster
-        renderItem={({ item }) => {
+        renderItem={({ item, index }) => {
+          const inputRange = [
+            (index - 1) * FULL_SIZE,
+            index * FULL_SIZE,
+            (index + 1) * FULL_SIZE,
+          ];
+
+          const translateX = scrollX.interpolate({
+            inputRange,
+            outputRange: [ITEM_WIDTH, 0, -ITEM_WIDTH],
+          });
+
+          const scale = scrollX.interpolate({
+            inputRange,
+            outputRange: [1, 1.5, 1],
+          });
+
           return (
-            <TouchableOpacity onPress={() => null} style={styles.itemContainer}>
-              <Image
-                source={{ uri: item.image }}
-                style={[StyleSheet.absoluteFillObject, { resizeMode: 'cover' }]}
-              />
-              <Text style={styles.location}>{item.location}</Text>
+            <TouchableOpacity
+              onPress={() => navigation.push('TravelListDetail', { item })} // currently this screen TravelListDetail doesn't exist
+              style={styles.itemContainer}>
+              <View
+                style={[
+                  StyleSheet.absoluteFillObject,
+                  { overflow: 'hidden', borderRadius: RADIUS },
+                ]}>
+                <Animated.Image
+                  source={{ uri: item.image }}
+                  style={[
+                    StyleSheet.absoluteFillObject,
+                    {
+                      resizeMode: 'cover',
+                      transform: [
+                        {
+                          scale,
+                        },
+                      ],
+                    },
+                  ]}
+                />
+              </View>
+              <Animated.Text
+                style={[
+                  styles.location,
+                  {
+                    transform: [{ translateX }],
+                  },
+                ]}>
+                {item.location}
+              </Animated.Text>
               <View style={styles.daysContainer}>
                 <Text style={styles.numberOfDaysValue}>
                   {item.numberOfDays}

@@ -14,7 +14,7 @@ const Stack = createSharedElementStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="TravelListDetail" headerMode="none">
+      <Stack.Navigator initialRouteName="TravelList" headerMode="none">
         {/* Animation 1 */}
         <Stack.Screen name="List" component={List} />
         <Stack.Screen
@@ -48,7 +48,7 @@ const App = () => {
         />
         {/* Animation 1 */}
         <Stack.Screen
-          name="TravelListDetail"
+          name="TravelList"
           component={TravelList}
           options={() => ({
             gestureEnabled: false,
