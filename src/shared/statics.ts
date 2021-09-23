@@ -79,3 +79,32 @@ export const SLIDER_DATA = [
     color: '#A531F9',
   },
 ];
+
+// Animation 2
+
+export const travelData = [
+  {
+    id: '1',
+    location: 'Lrabi, Thailand',
+    numberOfDays: 9,
+    image:
+      'https://images.unsplash.com/photo-1582880463021-ca57d542f276?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3027&q=80',
+    color: '#0C212D',
+  },
+  {
+    id: '2',
+    location: 'Bucharest, Romania',
+    numberOfDays: 6,
+    image:
+      'https://images.unsplash.com/photo-1483683804023-6ccdb62f86ef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
+    color: '#F8EACE',
+  },
+  {
+    id: '3',
+    location: 'Iceland',
+    numberOfDays: 5,
+    image:
+      'https://images.unsplash.com/photo-1529410980468-54c5d797d303?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
+    color: '#E4E5EA',
+  },
+];
