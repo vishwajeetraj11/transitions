@@ -3,7 +3,7 @@ module.exports = {
   extends: ['@react-native-community', 'prettier'],
   plugins: ['react', 'react-native', 'prettier'],
   rules: {
-    'react-native/no-unused-styles': 2,
+    'react-native/no-unused-styles': 'warn',
     'react-native/split-platform-components': 2,
     'react-native/no-color-literals': 'off',
     'react-native/no-raw-text': 2,

@@ -7,6 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import List from './screens/List';
 import { DATA } from './shared/statics';
 import { TravelList } from './screens/TravelList';
+import TravelListDetail from './screens/TravelListDetail';
 
 enableScreens();
 const Stack = createSharedElementStackNavigator();
@@ -73,6 +74,7 @@ const App = () => {
             },
           })}
         />
+        <Stack.Screen name="TravelListDetail" component={TravelListDetail} />
       </Stack.Navigator>
     </NavigationContainer>
   );
