@@ -20,6 +20,17 @@ interface Props {
   route: any;
 }
 
+const zoomIn = {
+  0: {
+    opacity: 0,
+    scale: 0,
+  },
+  1: {
+    opacity: 1,
+    scale: 1,
+  },
+};
+
 const TravelListDetail: React.FC<Props> = ({ navigation, route }) => {
   const { item } = route.params;
   return (
@@ -75,9 +86,12 @@ const TravelListDetail: React.FC<Props> = ({ navigation, route }) => {
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{ padding: SPACING }}
-          renderItem={({ item }) => {
+          renderItem={({ item, index }) => {
             return (
-              <View
+              <Animatable.View
+                duration={700}
+                animation={zoomIn}
+                delay={400 + index * 100}
                 style={{
                   backgroundColor: '#ffffff',
                   padding: SPACING,
@@ -96,7 +110,7 @@ const TravelListDetail: React.FC<Props> = ({ navigation, route }) => {
                   }}
                 />
                 <Text>Activity #{item + 1}</Text>
-              </View>
+              </Animatable.View>
             );
           }}
         />
