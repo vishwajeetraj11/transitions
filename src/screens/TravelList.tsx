@@ -2,9 +2,7 @@ import React, { useRef } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
-  FlatList,
   TouchableOpacity,
-  Image,
   Text,
   View,
   Animated,
