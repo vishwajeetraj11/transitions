@@ -3,6 +3,7 @@ import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { BackIcon } from '../components/BackIcon';
 import { animation2Specs } from '../shared/constants';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { SharedElement } from 'react-navigation-shared-element';
 AntDesign.loadFont();
 const { FULL_SIZE, ITEM_HEIGHT, ITEM_WIDTH, RADIUS, SPACING } = animation2Specs;
 
@@ -20,20 +21,32 @@ const TravelListDetail: React.FC<Props> = ({ navigation, route }) => {
           name="arrowleft"
           size={24}
           style={styles.backButton}
-          color="#000"
+          color="#fff"
           onPress={() => navigation.goBack()}
         />
-        <Image
-          source={{ uri: item.image }}
-          style={[
-            StyleSheet.absoluteFillObject,
-            {
-              resizeMode: 'cover',
-            },
-          ]}
-        />
+        <SharedElement
+          id={`item.${item.id}.photo`}
+          style={StyleSheet.absoluteFillObject}>
+          <View
+            style={[
+              StyleSheet.absoluteFillObject,
+              { overflow: 'hidden', borderRadius: RADIUS },
+            ]}>
+            <Image
+              source={{ uri: item.image }}
+              style={[
+                StyleSheet.absoluteFillObject,
+                {
+                  resizeMode: 'cover',
+                },
+              ]}
+            />
+          </View>
+        </SharedElement>
       </View>
-      <Text style={[styles.location]}>{item.location}</Text>
+      <SharedElement id={`item.${item.id}.location`}>
+        <Text style={[styles.location]}>{item.location}</Text>
+      </SharedElement>
     </SafeAreaView>
   );
 };

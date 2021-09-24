@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { travelData } from '../shared/statics';
 import { animation2Specs } from '../shared/constants';
+import { SharedElement } from 'react-navigation-shared-element';
 
 const { FULL_SIZE, ITEM_HEIGHT, ITEM_WIDTH, RADIUS, SPACING } = animation2Specs;
 
@@ -46,44 +47,51 @@ export const TravelList: React.FC<Props> = ({ navigation }) => {
             outputRange: [ITEM_WIDTH, 0, -ITEM_WIDTH],
           });
 
-          const scale = scrollX.interpolate({
-            inputRange,
-            outputRange: [1, 1.5, 1],
-          });
+          // const scale = scrollX.interpolate({
+          //   inputRange,
+          //   outputRange: [1, 1.1, 1],
+          // });
 
           return (
             <TouchableOpacity
               onPress={() => navigation.push('TravelListDetail', { item })} // currently this screen TravelListDetail doesn't exist
               style={styles.itemContainer}>
-              <View
-                style={[
-                  StyleSheet.absoluteFillObject,
-                  { overflow: 'hidden', borderRadius: RADIUS },
-                ]}>
-                <Animated.Image
-                  source={{ uri: item.image }}
+              <SharedElement
+                id={`item.${item.id}.photo`}
+                style={StyleSheet.absoluteFillObject}>
+                <View
                   style={[
                     StyleSheet.absoluteFillObject,
+                    { overflow: 'hidden', borderRadius: RADIUS },
+                  ]}>
+                  <Animated.Image
+                    source={{ uri: item.image }}
+                    style={[
+                      StyleSheet.absoluteFillObject,
+                      {
+                        resizeMode: 'cover',
+                        // transform: [
+                        //   {
+                        //     scale,
+                        //   },
+                        // ],
+                      },
+                    ]}
+                  />
+                </View>
+              </SharedElement>
+
+              <SharedElement id={`item.${item.id}.location`}>
+                <Animated.Text
+                  style={[
+                    styles.location,
                     {
-                      resizeMode: 'cover',
-                      transform: [
-                        {
-                          scale,
-                        },
-                      ],
+                      transform: [{ translateX }],
                     },
-                  ]}
-                />
-              </View>
-              <Animated.Text
-                style={[
-                  styles.location,
-                  {
-                    transform: [{ translateX }],
-                  },
-                ]}>
-                {item.location}
-              </Animated.Text>
+                  ]}>
+                  {item.location}
+                </Animated.Text>
+              </SharedElement>
               <View style={styles.daysContainer}>
                 <Text style={styles.numberOfDaysValue}>
                   {item.numberOfDays}
@@ -110,8 +118,8 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     width: ITEM_WIDTH * 0.8,
     position: 'absolute',
-    top: SPACING,
-    left: SPACING,
+    top: SPACING * 2,
+    left: SPACING * 2,
   },
   numberOfDaysValue: {
     fontWeight: '800',

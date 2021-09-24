@@ -48,9 +48,22 @@ const App = () => {
           })}
         />
         {/* Animation 1 */}
+        <Stack.Screen name="TravelList" component={TravelList} />
         <Stack.Screen
-          name="TravelList"
-          component={TravelList}
+          name="TravelListDetail"
+          component={TravelListDetail}
+          sharedElementsConfig={(route, otherRoute, showing) => {
+            const { item } = route.params;
+            // console.log(route);
+            return [
+              {
+                id: `item.${item.id}.photo`,
+              },
+              {
+                id: `item.${item.id}.location`,
+              },
+            ];
+          }}
           options={() => ({
             gestureEnabled: false,
             // for the open or the close of the navigation what type of animation should occur
@@ -74,7 +87,6 @@ const App = () => {
             },
           })}
         />
-        <Stack.Screen name="TravelListDetail" component={TravelListDetail} />
       </Stack.Navigator>
     </NavigationContainer>
   );
