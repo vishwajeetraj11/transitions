@@ -8,6 +8,8 @@ import List from './screens/List';
 import { DATA } from './shared/statics';
 import { TravelList } from './screens/TravelList';
 import TravelListDetail from './screens/TravelListDetail';
+import { TravelUpList } from './screens/TravelUpList';
+import { TravelUpDetails } from './screens/TravelUpDetails';
 
 enableScreens();
 const Stack = createSharedElementStackNavigator();
@@ -15,7 +17,7 @@ const Stack = createSharedElementStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="TravelList" headerMode="none">
+      <Stack.Navigator initialRouteName="TravelUpList" headerMode="none">
         {/* Animation 1 */}
         <Stack.Screen name="List" component={List} />
         <Stack.Screen
@@ -47,7 +49,7 @@ const App = () => {
             },
           })}
         />
-        {/* Animation 1 */}
+        {/* Animation 2 */}
         <Stack.Screen name="TravelList" component={TravelList} />
         <Stack.Screen
           name="TravelListDetail"
@@ -61,6 +63,54 @@ const App = () => {
               },
               {
                 id: `item.${item.id}.location`,
+              },
+            ];
+          }}
+          options={() => ({
+            gestureEnabled: false,
+            // for the open or the close of the navigation what type of animation should occur
+            transitionSpec: {
+              open: {
+                animation: 'timing',
+                config: { duration: 500, easing: Easing.inOut(Easing.ease) },
+              },
+              close: {
+                animation: 'timing',
+                config: { duration: 500, easing: Easing.inOut(Easing.ease) },
+              },
+            },
+            // currently it's transition => opacity based on navigation percentage
+            cardStyleInterpolator: ({ current: { progress } }) => {
+              return {
+                cardStyle: {
+                  opacity: progress,
+                },
+              };
+            },
+          })}
+        />
+        {/* Animation 3 */}
+        <Stack.Screen name="TravelUpList" component={TravelUpList} />
+        <Stack.Screen
+          name="TravelUpDetail"
+          component={TravelUpDetails}
+          sharedElementsConfig={(route, otherRoute, showing) => {
+            const { item } = route.params;
+            // console.log(route);
+            console.log([
+              {
+                id: `item.${item.key}.name`,
+              },
+              {
+                id: `item.${item.key}.image`,
+              },
+            ]);
+            return [
+              {
+                id: `item.${item.key}.name`,
+              },
+              {
+                id: `item.${item.key}.image`,
               },
             ];
           }}
